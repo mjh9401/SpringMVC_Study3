@@ -1,7 +1,9 @@
 package hello.itemService.web.basic;
 
+import hello.itemService.domain.item.DeliveryCode;
 import hello.itemService.domain.item.Item;
 import hello.itemService.domain.item.ItemRepository;
+import hello.itemService.domain.item.ItemType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +33,21 @@ public class BasicController {
         regions.put("JEJU","제주");
 
         return regions;
+    }
+
+    @ModelAttribute("itemTypes")
+    public ItemType[] itemTypes(){
+        ItemType[] values = ItemType.values();
+        return values;
+    }
+
+    @ModelAttribute("deliveryCodes")
+    public List<DeliveryCode> deliveryCodes(){
+        List<DeliveryCode> deliveryCodes = new ArrayList<>();
+        deliveryCodes.add(new DeliveryCode("FAST","빠른 배송"));
+        deliveryCodes.add(new DeliveryCode("NORMAL","일반 배송"));
+        deliveryCodes.add(new DeliveryCode("SLOW","느린 배송"));
+        return deliveryCodes;
     }
 
 
@@ -60,6 +78,8 @@ public class BasicController {
     public String addItem(Item item, RedirectAttributes redirectAttributes){
         log.info("item.open={}",item.getOpen());
         log.info("item.regions={}",item.getRegions());
+        log.info("item.itemType={}",item.getItemType());
+
         Item savedItem = itemRepository.save(item);
         redirectAttributes.addAttribute("itemId",savedItem.getId());
         redirectAttributes.addAttribute("status",true);
