@@ -24,7 +24,6 @@ public class ValidationApiController {
         }
 
         log.info("성공 로직 실행");
-        log.info("성공 로직 실행2");
         return form;
     }
 }
