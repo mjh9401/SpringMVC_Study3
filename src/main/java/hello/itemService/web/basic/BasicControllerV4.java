@@ -18,7 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 @Controller
-@RequestMapping("/validation/v4/items")
+@RequestMapping("/items")
 @RequiredArgsConstructor
 @Slf4j
 public class BasicControllerV4 {
