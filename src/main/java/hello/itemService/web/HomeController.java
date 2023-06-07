@@ -2,6 +2,7 @@ package hello.itemService.web;
 
 import hello.itemService.domain.member.Member;
 import hello.itemService.domain.member.MemberRepository;
+import hello.itemService.web.argumentresolver.Login;
 import hello.itemService.web.session.SessionManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -22,7 +23,7 @@ public class HomeController {
 
 
     @GetMapping("/")
-    public String homeLogin(@SessionAttribute(name=SessionConst.LOGIN_MEMBER,required = false) Member loginMember, Model model){
+    public String homeLogin(@Login Member loginMember, Model model){
 
         // 세션에 회원 데이터가 없으면 home
         if(loginMember == null){
